@@ -1,0 +1,10 @@
+Line:
+To search for a person in the line, simply type lineName.search(personName).  If the person is present, it will return their name, otherwise it will return nil telling you that the person is not currently in the line.
+
+Screen:
+To search for a pixel in the screen, simply type screenName.at(x-value, y-value).  If there is currently a pixel located in this location it will return the entire pixel object.  Otherwise, it will return nil, telling you that a pixel has not been added to that location yet.
+
+Other applications:
+The line structure could represent many things, mainly various types of list, like to do lists, lists of users, lists of posts, new movies, or anything else that moves in an ordered, linear, fashion.
+
+The screen structure is more complicated.  It represents places where each object, or value, has multiple characteristics.  For instance, it could be used to determine inventory (using an associative array) and a recurring weekly schedule where the base array indexes represent a day of the week in the nested arrays represent the recurring tasks that occur on that specific day.   

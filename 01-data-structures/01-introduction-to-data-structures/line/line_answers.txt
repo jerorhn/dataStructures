@@ -1,0 +1,1 @@
+For this problem, I simply kept and array that represented the line.  The index represents the place they hold in the line, where the value represents their name, so when a person leaves the line (is deleted), the rest of the line behind that person, moves forward one index.  When a person is added they are "pushed" to the end of the line.  
