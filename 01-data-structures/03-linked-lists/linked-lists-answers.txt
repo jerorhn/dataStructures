@@ -1,0 +1,3 @@
+A linked list does not have spacial locality.  Spacial locality refers to where data is located.  Having spacial locality means that the items are located close to eachother.  This makes it more likely that the entire list will be available in the cache.  When a list does not have spacial locality, it is more likely that a search will require the Ram to be accessed to get the data which takes a lot longer.  So, while linked lists take less memory to store, they require more time to load than arrays.
+
+Creating an array takes more time than creating a linked list.  Accessing the last element of a linked list takes more time than for an array.  Deleting the last element of a linked list takes more time than for an array.  
