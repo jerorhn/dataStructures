@@ -6,38 +6,56 @@ class HashClass
   end
 
   def []=(key, value)
-    @items[index(key, @size)] = HashItem.new(key, value)
+    idx = index(key, @size)
+    if !@items[idx].nil?
+      if @items[idx].key != key
+        resize
+        return self[key] = value
+      elsif @items[idx].value != value
+        resize
+      end
+    end
+    @items[idx] = HashItem.new(key, value)
   end
 
-
   def [](key)
-    @items[index(key, @size)]
+    idx = index(key, @size)
+    @items[idx].value
   end
 
   def resize
-    @size = @items.length * 2
-    for i in 0..@items.length - 1
-      if @items[i] != nil
-        @items[index(@items[i].key, @size)] = @items[i].value
-      end
+    @size = @size * 2
+    @temp = @items
+    @items = Array.new(@size)
+    @temp.each do |item|
+      next unless item
+      idx = index(item.key, @size)
+      @items[idx] = item
     end
-    @items[@size - 1] = nil if @items[@size - 1] === nil
   end
 
   # Returns a unique, deterministically reproducible index into an array
   # We are hashing based on strings, let's use the ascii value of each string as
   # a starting point.
   def index(key, size)
-    index = 0
+    hash_code = 0
     key.each_byte do |c|
-      index += c
+      hash_code += c
     end
-    index % @size
+    hash_code % @size
   end
 
   # Simple method to return the number of items in the hash
   def size
     @items.length
   end
+
+  # def print_all
+  #   @items.each_with_index do |item, idx|
+  #     next unless item
+  #     puts "Key: " + item.key + " Value: " + item.value + " At: " + idx.to_s
+  #   end
+  #   puts "______________________________"
+  # end
 
 end

@@ -1,0 +1,1 @@
+Constantly doubling the size of the array is a bad idea because the array is likely to become unnecessarily large while still having many empty indices.  
