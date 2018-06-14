@@ -42,7 +42,14 @@ class LinkedList
       puts current.data
       current = current.next
     end
+  end
 
+  def choose(node)
+    if @head.data == node.data
+      return @head.next
+    else
+      @head = @head.next
+    end
   end
 
   # This method removes `node` from the list and must keep the rest of the list intact.
