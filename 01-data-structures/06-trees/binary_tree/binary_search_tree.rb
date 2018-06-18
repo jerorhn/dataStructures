@@ -40,6 +40,31 @@ class BinarySearchTree
   def delete(root, data)
     node = find(root, data)
 
+    # run find method but stop where current.left or current.right is the node to delete
+    stack = []
+    stack.push(root)
+    leftchild = nil
+    rightchild = nil
+    while !stack.empty?
+      current = stack.pop
+      leftchild = current if current.left.title == data
+      rightchild = current if current.right.title == data
+      stack.push(current.right) unless current.right.nil?
+      stack.push(current.left) unless current.left.nil?
+    end
+    # save the node.left of the node to be deleted to be the new node
+    if leftchild != nil
+      leftchild.left = node.left
+    elsif rightchild != nil
+      rightchild.right = node.right
+    else
+      return nil
+    end
+    # set the return from the altered find method's child to be the saved node
+    # put all of the nodes after the node to be deleted in an array
+
+    # reinsert each element of the array with the root equal to the saved node
+
   end
 
   # Recursive Breadth First Search
