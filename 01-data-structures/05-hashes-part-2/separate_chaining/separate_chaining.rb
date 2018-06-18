@@ -12,14 +12,15 @@ class SeparateChaining
 
   def []=(key, value)
     idx = index(key, @size)
-    if load_factor > @max_load_factor
-      resize
-    end
 
     if @items[idx].nil?
       @items[idx] = LinkedList.new
     end
     @items[idx].add_to_tail(Node.new(key, value))
+
+    if load_factor > @max_load_factor
+      resize
+    end
   end
 
   def [](key)
@@ -44,16 +45,15 @@ class SeparateChaining
 
   # Calculate the current load factor
   def load_factor
-    @total = 0
+    total = 0.0
     @items.each do |item|
       if item.is_a? Node
-        @total = @total + 1
+        total = total + 1
       elsif item.is_a? LinkedList
-        @total = item.length
+        total = total + item.length
       end
     end
-    puts "#{@total} and #{@size}"
-    @total.to_f / @size.to_f
+    total.to_f / @size.to_f
   end
 
   # Simple method to return the number of items in the hash
@@ -64,13 +64,13 @@ class SeparateChaining
   # Resize the hash
   def resize
     @size = @size * 2
-    @temp = @items
+    temp = @items
     @items = Array.new(@size)
-    @temp.each do |item|
+    temp.each do |item|
       next unless item
       current = item.head
       idx = index(current.key, @size)
-      @items[idx] = current
+      @items[idx] = item
     end
   end
 end

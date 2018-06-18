@@ -49,7 +49,7 @@ class LinkedList
   end
 
   def length
-    @temp_total = 1
+    @temp_total = 0
     current = @head
     while current
       current = current.next
