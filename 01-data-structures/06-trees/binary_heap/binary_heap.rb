@@ -1,6 +1,7 @@
 require_relative 'node'
 
 class BinaryHeap
+  attr_accessor :heap
 
   def initialize(root)
     @heap = [root]
@@ -15,13 +16,21 @@ class BinaryHeap
   end
 
   def find(root, data)
-    index = @heap_map[data.title]
+    return nil if data.nil?
+    index = @heap_map[data]
+    return nil if index.nil?
     return @heap[index]
   end
 
   def delete(root, data)
+    return nil if data.nil?
     index = find_index(root, data)
+    return if index.nil?
+    exchange(index, @heap.size - 1)
+    data_to_delete = @heap.pop
+    @heap_map.delete(data_to_delete.title)
     shift_down(index)
+    return data_to_delete
   end
 
   def print
@@ -34,14 +43,15 @@ class BinaryHeap
 
   def shift_up(index)
     parent_index = index / 2
-    return if index <= 1
+    return if index <= 0
     return if @heap[index].rating >= @heap[parent_index].rating
     exchange(index, parent_index)
     shift_up(parent_index)
   end
 
   def shift_down(index)
-    child_index = index * 2
+    child_index = [index * 2, 1].max
+    puts "index #{index} child_index #{child_index} array length #{@heap.size}"
     return if child_index > @heap.size - 1
     is_last_item = child_index == @heap.size - 1
     left_item = @heap[child_index].rating
@@ -65,7 +75,7 @@ class BinaryHeap
   end
 
   def find_index(root, data)
-    index = @heap_map[data.title]
+    index = @heap_map[data]
     return index
   end
 end
