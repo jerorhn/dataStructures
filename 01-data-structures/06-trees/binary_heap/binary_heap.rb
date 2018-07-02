@@ -34,7 +34,7 @@ class BinaryHeap
   end
 
   def print
-    @heap.each do |item|
+    @heap.each_with_index do |item, idx|
       puts "#{item.title}: #{item.rating}"
     end
   end
@@ -42,20 +42,19 @@ class BinaryHeap
   private
 
   def shift_up(index)
-    parent_index = index / 2
+    parent_index = index - 1
     return if index <= 0
-    return if @heap[index].rating >= @heap[parent_index].rating
+    return if @heap[index].rating > @heap[parent_index].rating
     exchange(index, parent_index)
     shift_up(parent_index)
   end
 
   def shift_down(index)
     child_index = [index * 2, 1].max
-    puts "index #{index} child_index #{child_index} array length #{@heap.size}"
     return if child_index > @heap.size - 1
     is_last_item = child_index == @heap.size - 1
     left_item = @heap[child_index].rating
-    right_item = @heap[child_index + 1].rating
+    right_item = is_last_item ? nil : @heap[child_index + 1].rating
     child_index += 1 if !is_last_item && right_item < left_item
     return if @heap[index].rating <= @heap[child_index].rating
     exchange(index, child_index)

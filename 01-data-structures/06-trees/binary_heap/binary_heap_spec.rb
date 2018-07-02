@@ -91,6 +91,7 @@ RSpec.describe BinaryHeap, type: Class do
     it "properly deletes a first node" do
       heap.insert(root, braveheart)
       heap.insert(root, pacific_rim)
+    
       heap.delete(root, pacific_rim.title)
       expect(heap.find(root, pacific_rim.title)).to be_nil
     end
