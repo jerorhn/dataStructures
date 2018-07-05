@@ -1,0 +1,6 @@
+1. The binary search tree guarantees order from left to right where as binary heap guarantees order from top to bottom.
+2.
+  a. 10000 insertions takes 0.005961s in a heap and 4.268286s in a tree.
+  b. finding the 5000 element takes 0.000033s in a heap and 0.000943s in a tree.
+  c. deleting the 7501 element takes 0.000023s in a heap and 4.828518s in a tree.
+  d. You would use a binary tree when you needed an ordered list that was commonly updated.  
